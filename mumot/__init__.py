@@ -49,9 +49,10 @@ from ._version import __version__
 
 try:
     # Try to get the currently-running IPython instance
+    print('here')
     ipython = get_ipython()
     ipython.magic('alias_magic model latex')
-    ipython.magic('matplotlib nbagg')
+    ipython.magic('matplotlib notebook')
 
     def _hide_traceback(exc_tuple=None, filename=None, tb_offset=None,
                        exception_only=False, running_compiled_code=False):
@@ -62,6 +63,7 @@ try:
     ipython.showtraceback = _hide_traceback
 except NameError as e:
     # There is no currently-running IPython instance
+    print('oops')
     pass
 
 
@@ -5335,6 +5337,7 @@ class MuMoTbifurcationView(MuMoTview):
     def _initFigure(self):
         #self._show_computation_start()
         if not self._silent:
+            plt.close(self._figureNum)
             plt.figure(self._figureNum)
             plt.clf()
             self._resetErrorMessage()
@@ -5906,6 +5909,7 @@ class MuMoTstochasticSimulationView(MuMoTview):
         
     def _initFigure(self):
         if not self._silent:
+            plt.close(self._figureNum)
             plt.figure(self._figureNum)
             plt.clf()
 
